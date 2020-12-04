@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration  
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 全局setting配置，根据需要添加 -->
+	<settings>
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+	<!-- 配置别名 -->
+	<typeAliases>
+		<typeAlias alias="MANAGER" type="com.news.entity.Manager" />
+		<typeAlias alias="NEWS_TYPE" type="com.news.entity.News_type" />
+		<typeAlias alias="NEWS" type="com.news.entity.News" />
+		<typeAlias alias="REVIEW" type="com.news.entity.Review" />
+		<typeAlias alias="SOURCE" type="com.news.entity.Source" />
+		<typeAlias alias="USER" type="com.news.entity.User" />
+		<typeAlias alias="SUPPORT" type="com.news.entity.Support" />
+	</typeAliases>
+
+	<!-- 配置mapper 由于使用spring和mybatis的整合包进行mapper扫描，这里不需要配置了。 但必须遵循:mapper.xml和mapper.java文件同名且在一个目录 -->
+	<mappers>
+		<mapper resource="com/news/entity/ManagerMapper.xml" />
+		<mapper resource="com/news/entity/News_typeMapper.xml" />
+		<mapper resource="com/news/entity/NewsMapper.xml" />
+		<mapper resource="com/news/entity/ReviewMapper.xml" />
+		<mapper resource="com/news/entity/SourceMapper.xml" />
+		<mapper resource="com/news/entity/UserMapper.xml" />
+		<mapper resource="com/news/entity/SupportMapper.xml" />
+	</mappers>
+</configuration>  

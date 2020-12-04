@@ -1,0 +1,33 @@
+#footerBody {
+    text-align: center;
+    background: #f1f1f1;
+    min-width: 1000px;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: "宋体", Arial, Helvetica, sans-serif;
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+
+#footerBody .links {
+    border-top: 1px solid #d2d2d2;
+    background: #f1f1f1;
+}
+
+#footerBody .links .cont {
+    width: 980px;
+    margin: 0 auto;
+    padding: 20px 0;
+    border-bottom: 1px dotted #a8cbeb;
+}
+
+#footerBody .links .left {
+    float: left;
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 14px;
+    color: #105d95;
+    font-weight: bold;
+}
+

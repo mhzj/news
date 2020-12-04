@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!--改location="自己工程下数据库驱动的jar包"-->
+	<classPathEntry location="C:\Users\hasee\Desktop\WorkSpace\news03\src\mysql-connector-java-5.1.6-bin.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!--改jdbcConnection="自己工程的数据库连接"-->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/news?serverTimezone=UTC&amp;useSSL=false" userId="root" password="root">
+		</jdbcConnection>
+		
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!--设置实体类放置的文件夹路径,改targetPackage="放置自动生成文件的目录"-->
+		<javaModelGenerator targetPackage="com.news.entity" targetProject="../src">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!--设置映射文件放置的文件夹路径,改targetPackage="放置自动生成文件的目录"-->
+		<sqlMapGenerator targetPackage="com.news.entity" targetProject="../src">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!--设置dao文件放置的文件夹路径,改targetPackage="放置自动生成的DAO文件的目录"-->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.news.dao" targetProject="../src">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		
+		<!-- 数据库表，注意：已经生成成功的,一定要注释掉,否则会在你原有的xml映射文件上再添加重复的代码,测试就会报错了.我们只生成新表！ -->		
+<!--         <table tableName="manager" domainObjectName="Manager" />
+        <table tableName="news" domainObjectName="News" />
+        <table tableName="news_type" domainObjectName="News_type" />
+        <table tableName="review" domainObjectName="Review" />
+        <table tableName="source" domainObjectName="Source" />
+        <table tableName="user" domainObjectName="User" /> -->
+        <table tableName="support" domainObjectName="Support" />
+        
+        
+	</context>
+
+</generatorConfiguration>

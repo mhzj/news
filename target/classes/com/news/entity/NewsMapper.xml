@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.news.dao.NewsMapper">
+  <resultMap id="BaseResultMap" type="com.news.entity.News">
+    <id column="nid" jdbcType="INTEGER" property="nid" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="ntext" jdbcType="VARCHAR" property="ntext" />
+    <result column="ntime" jdbcType="DATE" property="ntime" />
+    <result column="ntid" jdbcType="INTEGER" property="ntid" />
+    <result column="isreview" jdbcType="INTEGER" property="isreview" />
+    <result column="hot" jdbcType="INTEGER" property="hot" />
+    <result column="src" jdbcType="INTEGER" property="src" />
+    <result column="sourcetype" jdbcType="VARCHAR" property="sourcetype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    nid, author, title, ntext, ntime, ntid, isreview, hot, src, sourcetype
+  </sql>
+  <select id="selectByExample" parameterType="com.news.entity.NewsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from news
+    where nid = #{nid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from news
+    where nid = #{nid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.news.entity.NewsExample">
+    delete from news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.news.entity.News">
+    insert into news (nid, author, title, 
+      ntext, ntime, ntid, isreview, 
+      hot, src, sourcetype
+      )
+    values (#{nid,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{ntext,jdbcType=VARCHAR}, #{ntime,jdbcType=DATE}, #{ntid,jdbcType=INTEGER}, #{isreview,jdbcType=INTEGER}, 
+      #{hot,jdbcType=INTEGER}, #{src,jdbcType=INTEGER}, #{sourcetype,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.news.entity.News">
+    insert into news
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nid != null">
+        nid,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="ntext != null">
+        ntext,
+      </if>
+      <if test="ntime != null">
+        ntime,
+      </if>
+      <if test="ntid != null">
+        ntid,
+      </if>
+      <if test="isreview != null">
+        isreview,
+      </if>
+      <if test="hot != null">
+        hot,
+      </if>
+      <if test="src != null">
+        src,
+      </if>
+      <if test="sourcetype != null">
+        sourcetype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nid != null">
+        #{nid,jdbcType=INTEGER},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="ntext != null">
+        #{ntext,jdbcType=VARCHAR},
+      </if>
+      <if test="ntime != null">
+        #{ntime,jdbcType=DATE},
+      </if>
+      <if test="ntid != null">
+        #{ntid,jdbcType=INTEGER},
+      </if>
+      <if test="isreview != null">
+        #{isreview,jdbcType=INTEGER},
+      </if>
+      <if test="hot != null">
+        #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="src != null">
+        #{src,jdbcType=INTEGER},
+      </if>
+      <if test="sourcetype != null">
+        #{sourcetype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.news.entity.NewsExample" resultType="java.lang.Long">
+    select count(*) from news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update news
+    <set>
+      <if test="record.nid != null">
+        nid = #{record.nid,jdbcType=INTEGER},
+      </if>
+      <if test="record.author != null">
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntext != null">
+        ntext = #{record.ntext,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntime != null">
+        ntime = #{record.ntime,jdbcType=DATE},
+      </if>
+      <if test="record.ntid != null">
+        ntid = #{record.ntid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isreview != null">
+        isreview = #{record.isreview,jdbcType=INTEGER},
+      </if>
+      <if test="record.hot != null">
+        hot = #{record.hot,jdbcType=INTEGER},
+      </if>
+      <if test="record.src != null">
+        src = #{record.src,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourcetype != null">
+        sourcetype = #{record.sourcetype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update news
+    set nid = #{record.nid,jdbcType=INTEGER},
+      author = #{record.author,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      ntext = #{record.ntext,jdbcType=VARCHAR},
+      ntime = #{record.ntime,jdbcType=DATE},
+      ntid = #{record.ntid,jdbcType=INTEGER},
+      isreview = #{record.isreview,jdbcType=INTEGER},
+      hot = #{record.hot,jdbcType=INTEGER},
+      src = #{record.src,jdbcType=INTEGER},
+      sourcetype = #{record.sourcetype,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.news.entity.News">
+    update news
+    <set>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="ntext != null">
+        ntext = #{ntext,jdbcType=VARCHAR},
+      </if>
+      <if test="ntime != null">
+        ntime = #{ntime,jdbcType=DATE},
+      </if>
+      <if test="ntid != null">
+        ntid = #{ntid,jdbcType=INTEGER},
+      </if>
+      <if test="isreview != null">
+        isreview = #{isreview,jdbcType=INTEGER},
+      </if>
+      <if test="hot != null">
+        hot = #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="src != null">
+        src = #{src,jdbcType=INTEGER},
+      </if>
+      <if test="sourcetype != null">
+        sourcetype = #{sourcetype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where nid = #{nid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.news.entity.News">
+    update news
+    set author = #{author,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      ntext = #{ntext,jdbcType=VARCHAR},
+      ntime = #{ntime,jdbcType=DATE},
+      ntid = #{ntid,jdbcType=INTEGER},
+      isreview = #{isreview,jdbcType=INTEGER},
+      hot = #{hot,jdbcType=INTEGER},
+      src = #{src,jdbcType=INTEGER},
+      sourcetype = #{sourcetype,jdbcType=VARCHAR}
+    where nid = #{nid,jdbcType=INTEGER}
+  </update>
+
+  <!-- ///////////////////////////////////////////////////////////////////////// -->
+  <select id="findNewsByRedu" parameterType="com.news.entity.News" resultMap="BaseResultMap">
+		select * from news where hot=#{0} and ntid=#{1}
+	</select>
+  <select id="findNewsByhot" parameterType="com.news.entity.News" resultMap="BaseResultMap">
+		select * from news where hot=#{0}
+	</select>
+  <select id="findNewsByntid" parameterType="com.news.entity.News" resultMap="BaseResultMap">
+		select * from news where ntid=#{0}
+	</select>
+
+
+  <insert id="add" parameterType="com.news.entity.News">
+		insert into news ( title ) values (#{title})
+	</insert>
+
+  <delete id="delete" parameterType="com.news.entity.News">
+		delete from news where nid= #{nid}
+	</delete>
+
+  <select id="get" parameterType="com.news.entity.News" resultMap="BaseResultMap">
+		select * from news where nid= #{nid}
+	</select>
+
+  <update id="update" parameterType="com.news.entity.News">
+		update news title=#{title} where nid=#{nid}
+	</update>
+
+  <select id="list" resultMap="BaseResultMap">
+		select * from news
+	</select>
+
+  <select id="listByNtid"  resultMap="BaseResultMap">
+		select * from news where ntid=#{ntid}
+	</select>
+
+  <select id="listBySourcetype"  resultMap="BaseResultMap">
+		select * from news where sourcetype=#{sourcetype}
+	</select>
+
+  <select id="total" resultType="int">
+		select count(*) from news where ntid=#{ntid}
+	</select>
+  <select id="listBysearchTitle"  resultMap="BaseResultMap">
+    <!-- select * from news where title like '%${title}%' -->
+    select * from news where title like "%"#{title}"%"
+    <!-- select * from news where title LIKE CONCAT(CONCAT('%',#{title}),'%') -->
+  </select>
+
+  <select id="findByTypeandTitle"  resultMap="BaseResultMap">
+	select * from news where ntid=#{0} and title like "%"#{1}"%"
+</select>
+
+    <select id="findByTypeandSourcetype"  resultMap="BaseResultMap">
+	select * from news where ntid=#{0} and sourcetype like #{1}
+</select>
+
+  <select id="findBySourcetypeandTitle"  resultMap="BaseResultMap">
+	select * from news where sourcetype=#{0} and title like "%"#{1}"%"
+</select>
+  <select id="findByTypeandAuthor"  resultMap="BaseResultMap">
+	select * from news where ntid=#{0} and author like "%"#{1}"%"
+</select>
+
+
+  <select id="findBySourcetypeTypeandTitle"  resultMap="BaseResultMap">
+	select *  from news where ntid=#{0} and sourcetype=#{1} and title like "%"#{2}"%"
+</select>
+</mapper>
